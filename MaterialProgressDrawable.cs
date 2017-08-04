@@ -485,7 +485,7 @@ namespace RefreshLayout
 
             public void OnAnimationEnd(Animation animation)
             {
-                throw new NotImplementedException();
+
             }
 
             public void OnAnimationRepeat(Animation animation)

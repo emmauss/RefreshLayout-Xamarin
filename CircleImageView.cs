@@ -112,6 +112,15 @@ namespace RefreshLayout
             }
         }
 
+        protected override void OnAnimationEnd()
+        {
+            base.OnAnimationEnd();
+            if (mListener != null)
+            {
+                mListener.OnAnimationEnd(Animation);
+            }
+        }
+
         public void SetBackgroundColorRes(int colorRes)
         {
             SetBackgroundColor(new Color(ContextCompat.GetColor(Context, colorRes)));

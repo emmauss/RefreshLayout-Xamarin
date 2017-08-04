@@ -172,7 +172,7 @@ namespace RefreshLayout
                                 layout.mListener.OnHeaderRefresh();
 
                         }
-                        layout.OnHeaderRefresh(this, EventArgs.Empty);
+                        //layout.OnHeaderRefresh(this, EventArgs.Empty);
                     }
                     layout.mHeaderCurrentTargetOffsetTop = layout.mCircleView.Top;
                 }
@@ -778,7 +778,7 @@ namespace RefreshLayout
                         {
                             layout.mListener.OnHeaderRefresh();
                         }
-                        layout.OnHeaderRefresh(this, EventArgs.Empty);
+                        //layout.OnHeaderRefresh(this, EventArgs.Empty);
                     }
                     layout.mHeaderCurrentTargetOffsetTop = layout.mCircleView.Top;
                 }
@@ -829,7 +829,10 @@ namespace RefreshLayout
             mHeaderScaleDownAnimation = new HeaderScaleDownAnimation(this);
             mHeaderScaleDownAnimation.Duration = SCALE_DOWN_DURATION;
             mCircleView.SetAnimationListener(listener);
-            mCircleView.ClearAnimation();
+            if (mCircleView.Animation != null)
+            {
+                mCircleView.ClearAnimation();
+            }
             mCircleView.StartAnimation(mHeaderScaleDownAnimation);
         }
 

@@ -9,9 +9,6 @@ C:\Users\Emmanuel Hansen\Documents\Visual Studio 2017\Projects\HappyPandaXDroid\
 C:\Users\Emmanuel Hansen\Documents\Visual Studio 2017\Projects\HappyPandaXDroid\external\RefreshLayout-Xamarin\obj\Debug\android\bin\RefreshLayout.RefreshLayout.apk
 C:\Users\Emmanuel Hansen\Documents\Visual Studio 2017\Projects\HappyPandaXDroid\external\RefreshLayout-Xamarin\obj\Debug\R.cs.flag
 C:\Users\Emmanuel Hansen\Documents\Visual Studio 2017\Projects\HappyPandaXDroid\external\RefreshLayout-Xamarin\obj\Debug\uploadflags.txt
-C:\Users\Emmanuel Hansen\documents\visual studio 2017\Projects\HappyPandaXDroid\external\RefreshLayout-Xamarin\obj\Debug\RefreshLayout.dll.mdb
-C:\Users\Emmanuel Hansen\documents\visual studio 2017\Projects\HappyPandaXDroid\external\RefreshLayout-Xamarin\bin\Debug\RefreshLayout.dll.mdb
-C:\Users\Emmanuel Hansen\documents\visual studio 2017\Projects\HappyPandaXDroid\external\RefreshLayout-Xamarin\obj\Debug\RefreshLayout.dll.mdb
 C:\Users\Emmanuel Hansen\documents\visual studio 2017\Projects\HappyPandaXDroid\external\RefreshLayout-Xamarin\bin\Debug\RefreshLayout.dll.mdb
 C:\Users\Emmanuel Hansen\documents\visual studio 2017\Projects\HappyPandaXDroid\external\RefreshLayout-Xamarin\obj\Debug\RefreshLayout.dll.mdb
 C:\Users\Emmanuel Hansen\documents\visual studio 2017\Projects\HappyPandaXDroid\external\RefreshLayout-Xamarin\bin\Debug\RefreshLayout.dll.mdb
