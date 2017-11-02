@@ -146,7 +146,7 @@ namespace RefreshLayout
         // Whether the client has set a custom starting position;
         bool mHeaderUsingCustomStart;
 
-        private OnChildScrollCallback mChildScrollCallback;
+        private IOnChildScrollCallback mChildScrollCallback;
 
         public class AnimationListener : Java.Lang.Object, Animation.IAnimationListener
         {
@@ -377,6 +377,11 @@ namespace RefreshLayout
                     ResetHeader();
                     ResetFooter();
                 }
+            }
+
+            get
+            {
+                return base.Enabled;
             }
         }
 
@@ -717,8 +722,10 @@ namespace RefreshLayout
                 // Don't adjust the alpha during appearance otherwise.
                 mProgress.Alpha =MAX_ALPHA;
             }
-            mHeaderScaleAnimation = new HeaderScaleAnimation(this);
-            mHeaderScaleAnimation.Duration = mMediumAnimationDuration;
+            mHeaderScaleAnimation = new HeaderScaleAnimation(this)
+            {
+                Duration = mMediumAnimationDuration
+            };
             if (listener != null) {
                 mCircleView.SetAnimationListener(listener);
             }
@@ -826,8 +833,10 @@ namespace RefreshLayout
 
         public void StartScaleDownAnimation(Animation.IAnimationListener listener)
         {
-            mHeaderScaleDownAnimation = new HeaderScaleDownAnimation(this);
-            mHeaderScaleDownAnimation.Duration = SCALE_DOWN_DURATION;
+            mHeaderScaleDownAnimation = new HeaderScaleDownAnimation(this)
+            {
+                Duration = SCALE_DOWN_DURATION
+            };
             mCircleView.SetAnimationListener(listener);
             if (mCircleView.Animation != null)
             {
@@ -869,8 +878,10 @@ namespace RefreshLayout
             {
                 return null;
             }
-            Animation alpha = new AlphaAnimation(this,startingAlpha,endingAlpha);
-            alpha.Duration =ALPHA_ANIMATION_DURATION;
+            Animation alpha = new AlphaAnimation(this, startingAlpha, endingAlpha)
+            {
+                Duration = ALPHA_ANIMATION_DURATION
+            };
             // Clear out the previous animation listeners.
             mCircleView.SetAnimationListener(null);
             mCircleView.ClearAnimation();
@@ -1133,16 +1144,18 @@ namespace RefreshLayout
         {
             if (mChildScrollCallback != null)
             {
-                return mChildScrollCallback.canChildScrollUp(this, mTarget);
+                return mChildScrollCallback.CanChildScrollUp(this, mTarget);
             }
             if (Build.VERSION.SdkInt < BuildVersionCodes.IceCreamSandwich)
             {
-                if (mTarget is AbsListView) {
-                    AbsListView absListView = (AbsListView)mTarget;
+                if (mTarget is AbsListView absListView)
+                {
                     return absListView.ChildCount > 0
                             && (absListView.FirstVisiblePosition > 0 || absListView.GetChildAt(0)
                                     .Top < absListView.PaddingTop);
-                } else {
+                }
+                else
+                {
                     return ViewCompat.CanScrollVertically(mTarget, -1) || mTarget.ScrollY > 0;
                 }
             }
@@ -1157,7 +1170,7 @@ namespace RefreshLayout
          * callback will return the value provided by the callback and ignore all internal logic.
          * @param callback Callback that should be called when CanChildScrollUp() is called.
          */
-        public void SetOnChildScrollUpCallback(OnChildScrollCallback callback = null)
+        public void SetOnChildScrollUpCallback(IOnChildScrollCallback callback = null)
         {
             mChildScrollCallback = callback;
         }
@@ -1170,15 +1183,17 @@ namespace RefreshLayout
         {
             if (mChildScrollCallback != null)
             {
-                return mChildScrollCallback.canChildScrollDown(this, mTarget);
+                return mChildScrollCallback.CanChildScrollDown(this, mTarget);
             }
-            if (mTarget is AbsListView) {
-                AbsListView absListView = (AbsListView)mTarget;
+            if (mTarget is AbsListView absListView)
+            {
                 return absListView.ChildCount > 0
                         && (absListView.LastVisiblePosition < absListView.Count - 1 ||
                         absListView.GetChildAt(absListView.ChildCount - 1).Bottom <
                                 absListView.Height - absListView.PaddingBottom);
-            } else {
+            }
+            else
+            {
                 return ViewCompat.CanScrollVertically(mTarget, 1);
             }
         }
@@ -1193,16 +1208,20 @@ namespace RefreshLayout
                 return false;
             }
 
-            if (mTarget is AbsListView) {
-                AbsListView absListView = (AbsListView)mTarget;
+            if (mTarget is AbsListView absListView)
+            {
                 return absListView.LastVisiblePosition >= absListView.Count - 1;
-            } else if (mTarget is Android.Support.V4.View.IScrollingView) {
+            }
+            else if (mTarget is Android.Support.V4.View.IScrollingView)
+            {
                 IScrollingView scrollingView = (IScrollingView)mTarget;
                 int offset = scrollingView.ComputeVerticalScrollOffset();
                 int range = scrollingView.ComputeVerticalScrollRange() -
                         scrollingView.ComputeVerticalScrollExtent();
                 return offset >= range;
-            } else {
+            }
+            else
+            {
                 return !ViewCompat.CanScrollVertically(mTarget, 1);
             }
         }
@@ -1975,8 +1994,10 @@ namespace RefreshLayout
             {
                 mHeaderStartingScale = ViewCompat.GetScaleX(mCircleView);
             }
-            mHeaderScaleDownToStartAnimation = new HeaderScaleDownToStartAnimation(this);
-            mHeaderScaleDownToStartAnimation.Duration = SCALE_DOWN_DURATION;
+            mHeaderScaleDownToStartAnimation = new HeaderScaleDownToStartAnimation(this)
+            {
+                Duration = SCALE_DOWN_DURATION
+            };
             if (listener != null) {
                 mCircleView.SetAnimationListener(listener);
             }
@@ -2057,7 +2078,7 @@ namespace RefreshLayout
          * Classes that wish to override {@link RefreshLayout#CanChildScrollUp()} method
          * and {@link RefreshLayout#CanChildScrollDown()} method behavior should implement this interface.
          */
-        public interface OnChildScrollCallback
+        public interface IOnChildScrollCallback
         {
             /**
              * Callback that will be called when {@link RefreshLayout#CanChildScrollUp()} method
@@ -2068,7 +2089,7 @@ namespace RefreshLayout
              *
              * @return Whether it is possible for the child view of parent layout to scroll up.
              */
-            bool canChildScrollUp(RefreshLayout parent, View child = null);
+            bool CanChildScrollUp(RefreshLayout parent, View child = null);
 
             /**
              * Callback that will be called when {@link RefreshLayout#CanChildScrollDown()} method
@@ -2079,7 +2100,7 @@ namespace RefreshLayout
              *
              * @return Whether it is possible for the child view of parent layout to scroll down.
              */
-            bool canChildScrollDown(RefreshLayout parent, View child = null);
+            bool CanChildScrollDown(RefreshLayout parent, View child = null);
         }
 
         /**

@@ -517,12 +517,12 @@ namespace RefreshLayout
         private void SetupAnimators()
         {
             Ring ring = mRing;
-            Animation animation = new MAnimation(this,mRing);
-
-
-            animation.RepeatCount = Animation.Infinite;
-            animation.RepeatMode = RepeatMode.Restart;
-            animation.Interpolator = LINEAR_INTERPOLATOR;
+            Animation animation = new MAnimation(this, mRing)
+            {
+                RepeatCount = Animation.Infinite,
+                RepeatMode = RepeatMode.Restart,
+                Interpolator = LINEAR_INTERPOLATOR
+            };
             animation.SetAnimationListener(new AnimationListener(this,ring));
             mAnimation = animation;
         }
